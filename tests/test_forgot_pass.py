@@ -16,7 +16,6 @@ class TestForgotPass:
     def test_open_reset_pass_page_if_fill_email_and_click_button(self, driver_factory):
         forgot_pass = ForgotPage(driver_factory)
         forgot_pass.open_page()
-        forgot_pass.click_element(forgot_pass.field_email)
         forgot_pass.fill_field(forgot_pass.field_email, 'fedtest@disp.ru')
         forgot_pass.click_element(forgot_pass.button_recovery)
         forgot_pass.wait_element(ResetPage.button_save)
