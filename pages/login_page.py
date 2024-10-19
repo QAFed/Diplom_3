@@ -1,0 +1,22 @@
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions
+
+
+class LoginPage:
+    URL = 'https://stellarburgers.nomoreparties.site/login'
+    link_recover_pass = (By.XPATH, '//a[text()="Восстановить пароль"]')
+
+    def __init__(self, driver):
+        self.driver = driver
+
+    def open_page(self):
+        self.driver.get(self.URL)
+
+    def wait_element(self, el_xpath):
+        WebDriverWait(self.driver, 5).until(
+            expected_conditions.visibility_of_element_located(el_xpath))
+
+    def click_element(self, el_xpath):
+        self.wait_element(el_xpath)
+        self.driver.find_element(*el_xpath).click()
