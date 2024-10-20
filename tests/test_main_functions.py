@@ -1,3 +1,5 @@
+import time
+
 from pages.header_page import HeaderElements
 from pages.order_list_page import OrderListPage
 from pages.home_page import HomePage
@@ -31,5 +33,13 @@ class TestMainFunctions:
         action_page.ac_click_element(HomePage.icon_krator_bulka)
         action_page.ac_click_element(IngrdientDetailsPage.button_close_x)
         assert driver_factory.find_elements(*IngrdientDetailsPage.flag_window_is_active) == []
+
+    def test_counter_ingredient_up_if_add_it_in_burger(self, driver_factory):
+        home_page = HomePage(driver_factory)
+        home_page.open_page()
+        time.sleep(10)
+        home_page.add_ingredient_in_burger(HomePage.icon_krator_bulka)
+        home_page.check_counter_ingredient(HomePage.icon_krator_bulka, "2")
+
 
 
