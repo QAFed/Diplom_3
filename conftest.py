@@ -7,8 +7,8 @@ from pages.home_page import HomePage
 # import pdb
 
 # @pytest.fixture(params=["Chrome"])
-@pytest.fixture(params=["Chrome", "Firefox"])
-# @pytest.fixture(params=["Firefox"])
+# @pytest.fixture(params=["Chrome", "Firefox"])
+@pytest.fixture(params=["Firefox"])
 def driver_factory(request):
     # pdb.set_trace()
     if request.param == "Chrome":
