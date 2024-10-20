@@ -24,3 +24,12 @@ class TestMainFunctions:
         action_page.ac_click_element(HomePage.icon_krator_bulka)
         action_page.wait_element(IngrdientDetailsPage.header_text)
         assert IngrdientDetailsPage.URLpart in driver_factory.current_url
+
+    def test_close_ingredient_details_page_if_click_close_button_x(self, driver_factory):
+        action_page = HomePage(driver_factory)
+        action_page.open_page()
+        action_page.ac_click_element(HomePage.icon_krator_bulka)
+        action_page.ac_click_element(IngrdientDetailsPage.button_close_x)
+        assert driver_factory.find_elements(*IngrdientDetailsPage.flag_window_is_active) == []
+
+
