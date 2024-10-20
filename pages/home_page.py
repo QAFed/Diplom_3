@@ -7,6 +7,7 @@ class HomePage:
     URL = 'https://stellarburgers.nomoreparties.site/'
     button_order = (By.XPATH, '//button[text()="Оформить заказ"]')
     header_text = (By.XPATH, '//h1[text()="Соберите бургер"]')
+    icon_krator_bulka = (By.XPATH, '//img[@alt="Краторная булка N-200i"]')
 
     def __init__(self, driver):
         self.driver = driver
