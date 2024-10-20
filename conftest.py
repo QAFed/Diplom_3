@@ -4,6 +4,7 @@ from helpers import LoginPassName
 from pages.register_page import RegisterPage
 from pages.login_page import LoginPage
 from pages.home_page import HomePage
+from pages.order_accepted_page import OrderAcceptedPage
 # import pdb
 
 # @pytest.fixture(params=["Chrome"])
@@ -44,4 +45,15 @@ def login_user(driver_factory):
     login_page.wait_element(HomePage.button_order)
     yield driver_factory
     driver_factory.quit()
+
+@pytest.fixture
+def driver_with_order(login_user):
+    driver = login_user
+    home_page = HomePage(login_user)
+    home_page.open_page()
+    home_page.add_ingredient_in_burger(HomePage.icon_krator_bulka)
+    home_page.ac_click_element(HomePage.button_order)
+    home_page.wait_element(OrderAcceptedPage.order_number)
+    order_number = login_user.find_element(*OrderAcceptedPage.order_number).text
+    return login_user, order_number
 
