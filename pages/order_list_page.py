@@ -21,3 +21,10 @@ class OrderListPage:
         element = self.driver.find_element(*el_xpath)
         actions = ActionChains(self.driver)
         actions.click(element).perform()
+
+    def click_to_card_by_number(self, order_number):
+        x_path = f'//li//p[contains(text(), "{order_number}")]'
+        order_card = self.driver.find_element(By.XPATH, x_path)
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", order_card)
+        self.ac_click_element(*x_path)
+

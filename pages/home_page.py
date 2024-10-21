@@ -11,6 +11,7 @@ class HomePage:
     icon_sous_spicy = (By.XPATH, '//img[@alt="Соус Spicy-X" and contains(@class, "BurgerIngredient")]')
     basket = (By.XPATH, '//section[contains(@class, "basket")]')
 
+
     def __init__(self, driver):
         self.driver = driver
 
