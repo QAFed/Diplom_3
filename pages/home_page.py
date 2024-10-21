@@ -10,7 +10,7 @@ class HomePage:
     icon_krator_bulka = (By.XPATH, '//img[@alt="Краторная булка N-200i"]')
     icon_sous_spicy = (By.XPATH, '//img[@alt="Соус Spicy-X" and contains(@class, "BurgerIngredient")]')
     basket = (By.XPATH, '//section[contains(@class, "basket")]')
-
+    loading_animation =(By.XPATH, '//div[contains(@class, "opened")]/img[@alt="loading animation"]')
 
     def __init__(self, driver):
         self.driver = driver
@@ -19,7 +19,7 @@ class HomePage:
         self.driver.get(self.URL)
 
     def wait_element(self, el_xpath):
-        WebDriverWait(self.driver, 5).until(
+        WebDriverWait(self.driver, 10).until(
             expected_conditions.visibility_of_element_located(el_xpath))
 
     def click_element(self, el_xpath):
@@ -46,3 +46,8 @@ class HomePage:
         self.wait_element(counter_xpath)
         actual_count = self.driver.find_element(*counter_xpath).text
         assert actual_count == expect_count
+
+    def wait_on_off_load_animation(self):
+        self.wait_element(HomePage.loading_animation)
+        WebDriverWait(self.driver, 5).until(
+            expected_conditions.invisibility_of_element_located(HomePage.loading_animation))

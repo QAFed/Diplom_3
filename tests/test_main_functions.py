@@ -46,10 +46,7 @@ class TestMainFunctions:
         home_page.open_page()
         home_page.add_ingredient_in_burger(HomePage.icon_krator_bulka)
         home_page.ac_click_element(HomePage.button_order)
-        time.sleep(3)
         home_page.wait_element(OrderAcceptedPage.order_number)
-        time.sleep(3)
         assert login_user.find_elements(*OrderAcceptedPage.flag_window_is_active) != []
-        time.sleep(3)
 
 

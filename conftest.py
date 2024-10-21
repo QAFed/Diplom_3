@@ -7,9 +7,9 @@ from pages.home_page import HomePage
 from pages.order_accepted_page import OrderAcceptedPage
 # import pdb
 
-# @pytest.fixture(params=["Chrome"])
+@pytest.fixture(params=["Chrome"])
 # @pytest.fixture(params=["Chrome", "Firefox"])
-@pytest.fixture(params=["Firefox"])
+# @pytest.fixture(params=["Firefox"])
 def driver_factory(request):
     # pdb.set_trace()
     if request.param == "Chrome":
@@ -53,6 +53,7 @@ def driver_with_order(login_user):
     home_page.open_page()
     home_page.add_ingredient_in_burger(HomePage.icon_krator_bulka)
     home_page.ac_click_element(HomePage.button_order)
+    home_page.wait_on_off_load_animation()
     home_page.wait_element(OrderAcceptedPage.order_number)
     order_number = login_user.find_element(*OrderAcceptedPage.order_number).text
     return login_user, order_number
