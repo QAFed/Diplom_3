@@ -5,6 +5,8 @@ from pages.register_page import RegisterPage
 from pages.login_page import LoginPage
 from pages.home_page import HomePage
 from pages.order_accepted_page import OrderAcceptedPage
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 # import pdb
 
 @pytest.fixture(params=["Chrome"])
@@ -13,7 +15,8 @@ from pages.order_accepted_page import OrderAcceptedPage
 def driver_factory(request):
     # pdb.set_trace()
     if request.param == "Chrome":
-        driver = webdriver.Chrome()
+        service = ChromeService(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=service)
     elif request.param == "Firefox":
         driver = webdriver.Firefox()
     else:
