@@ -58,4 +58,6 @@ class HomePage:
         self.ac_click_element(HomePage.button_order)
         self.wait_on_off_load_animation()
         self.wait_element(OrderAcceptedPage.order_number)
-        return self.driver.find_element(*OrderAcceptedPage.order_number).text
+        order_number = self.driver.find_element(*OrderAcceptedPage.order_number).text
+        self.ac_click_element(OrderAcceptedPage.button_close_x)
+        return order_number
