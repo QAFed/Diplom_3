@@ -1,8 +1,11 @@
+import time
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.action_chains import ActionChains
 from pages.order_accepted_page import OrderAcceptedPage
+
 
 class HomePage:
     URL = 'https://stellarburgers.nomoreparties.site/'
@@ -50,7 +53,7 @@ class HomePage:
 
     def wait_on_off_load_animation(self):
         self.wait_element(HomePage.loading_animation)
-        WebDriverWait(self.driver, 5).until(
+        WebDriverWait(self.driver, 10).until(
             expected_conditions.invisibility_of_element_located(HomePage.loading_animation))
 
     def create_new_order(self):

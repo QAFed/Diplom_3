@@ -8,6 +8,8 @@ class OrderListPage:
     header_text = (By.XPATH, '//h1[text()="Лента заказов"]')
     load_message = (By.XPATH, '//div[text()="Загрузка..."]')
     list_numbers_all_orders =(By.XPATH, '//ul//li//p[contains(text(),"#")]')
+    all_time_counter = (By.XPATH, '//p[contains(text(), "за все время")]/parent::div/p[contains(@class, "Order")]')
+    today_counter = (By.XPATH, '//p[contains(text(), "за сегодня")]/parent::div/p[contains(@class, "Order")]')
 
     def __init__(self, driver):
         self.driver = driver
@@ -16,11 +18,11 @@ class OrderListPage:
         self.driver.get(self.URL)
 
     def wait_element(self, el_xpath):
-        WebDriverWait(self.driver, 5).until(
+        WebDriverWait(self.driver, 10).until(
             expected_conditions.visibility_of_element_located(el_xpath))
 
     def wait_close(self, el_xpath):
-        WebDriverWait(self.driver, 5).until(
+        WebDriverWait(self.driver, 15).until(
             expected_conditions.invisibility_of_element_located(el_xpath))
 
     def ac_click_element(self, el_xpath):

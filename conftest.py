@@ -62,3 +62,12 @@ def driver_with_order(login_user):
     # order_number = login_user.find_element(*OrderAcceptedPage.order_number).text
     return login_user, order_number
 
+@pytest.fixture
+def driver_with_two_orders(login_user):
+    driver = login_user
+    home_page = HomePage(login_user)
+    home_page.open_page()
+    home_page.create_new_order()
+    home_page.open_page()
+    home_page.create_new_order()
+    return login_user
