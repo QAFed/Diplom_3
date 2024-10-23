@@ -6,6 +6,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 class OrderListPage:
     URL = 'https://stellarburgers.nomoreparties.site/feed'
     header_text = (By.XPATH, '//h1[text()="Лента заказов"]')
+    load_message = (By.XPATH, '//div[text()="Загрузка..."]')
 
     def __init__(self, driver):
         self.driver = driver
