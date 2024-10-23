@@ -54,10 +54,11 @@ def driver_with_order(login_user):
     driver = login_user
     home_page = HomePage(login_user)
     home_page.open_page()
-    home_page.add_ingredient_in_burger(HomePage.icon_krator_bulka)
-    home_page.ac_click_element(HomePage.button_order)
-    home_page.wait_on_off_load_animation()
-    home_page.wait_element(OrderAcceptedPage.order_number)
-    order_number = login_user.find_element(*OrderAcceptedPage.order_number).text
+    order_number = home_page.create_new_order()
+    # home_page.add_ingredient_in_burger(HomePage.icon_krator_bulka)
+    # home_page.ac_click_element(HomePage.button_order)
+    # home_page.wait_on_off_load_animation()
+    # home_page.wait_element(OrderAcceptedPage.order_number)
+    # order_number = login_user.find_element(*OrderAcceptedPage.order_number).text
     return login_user, order_number
 

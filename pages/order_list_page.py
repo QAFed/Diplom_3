@@ -7,6 +7,7 @@ class OrderListPage:
     URL = 'https://stellarburgers.nomoreparties.site/feed'
     header_text = (By.XPATH, '//h1[text()="Лента заказов"]')
     load_message = (By.XPATH, '//div[text()="Загрузка..."]')
+    list_numbers_all_orders =(By.XPATH, '//ul//li//p[contains(text(),"#")]')
 
     def __init__(self, driver):
         self.driver = driver
@@ -17,6 +18,10 @@ class OrderListPage:
     def wait_element(self, el_xpath):
         WebDriverWait(self.driver, 5).until(
             expected_conditions.visibility_of_element_located(el_xpath))
+
+    def wait_close(self, el_xpath):
+        WebDriverWait(self.driver, 5).until(
+            expected_conditions.invisibility_of_element_located(el_xpath))
 
     def ac_click_element(self, el_xpath):
         self.wait_element(el_xpath)
@@ -35,3 +40,9 @@ class OrderListPage:
         num_on_card_x = (By.XPATH, f'//section[contains(@class, "opened")]//p[contains(., "{order_number}")]')
         self.wait_element(num_on_card_x)
         assert order_number in self.driver.find_element(*num_on_card_x).text
+
+    def get_all_numbers_list(self):
+        self.wait_close(self.load_message)
+        list_el = self.driver.find_elements(*OrderListPage.list_numbers_all_orders)
+        list_num = [x.text for x in list_el]
+        return list_num

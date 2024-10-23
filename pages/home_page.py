@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.action_chains import ActionChains
+from pages.order_accepted_page import OrderAcceptedPage
 
 class HomePage:
     URL = 'https://stellarburgers.nomoreparties.site/'
@@ -51,3 +52,10 @@ class HomePage:
         self.wait_element(HomePage.loading_animation)
         WebDriverWait(self.driver, 5).until(
             expected_conditions.invisibility_of_element_located(HomePage.loading_animation))
+
+    def create_new_order(self):
+        self.add_ingredient_in_burger(HomePage.icon_krator_bulka)
+        self.ac_click_element(HomePage.button_order)
+        self.wait_on_off_load_animation()
+        self.wait_element(OrderAcceptedPage.order_number)
+        return self.driver.find_element(*OrderAcceptedPage.order_number).text

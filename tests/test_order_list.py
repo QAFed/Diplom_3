@@ -14,3 +14,4 @@ class TestOrderList:
             expected_conditions.invisibility_of_element_located(OrderListPage.load_message))
         order_list_page.click_to_card_by_number(order_number)
         order_list_page.check_number_order_on_open_card(order_number)
+
