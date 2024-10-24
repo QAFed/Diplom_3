@@ -5,6 +5,7 @@ from pages.header_page import HeaderElements
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from pages.personal_page import PersonalPage
+from pages.home_page import HomePage
 
 
 class TestOrderList:
@@ -31,3 +32,16 @@ class TestOrderList:
         all_number_from_order_list = action_page.get_all_numbers_list()
         # print('номера', all_number_from_order_list)
         assert all(num in all_number_from_order_list for num in all_number_from_history)
+
+
+    def test_counter_all_time_increment_if_add_order(self, driver_with_order):
+        driver, order_number = driver_with_order
+        order_list_page = OrderListPage(driver)
+        order_list_page.open_page()
+        count_before=order_list_page.get_value(OrderListPage.all_time_counter)
+        home_page = HomePage(driver)
+        home_page.open_page()
+        home_page.create_new_order()
+        order_list_page.open_page()
+        count_after = order_list_page.get_value(OrderListPage.all_time_counter)
+        assert count_after > count_before

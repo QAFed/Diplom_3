@@ -48,3 +48,7 @@ class OrderListPage:
         list_el = self.driver.find_elements(*OrderListPage.list_numbers_all_orders)
         list_num = [x.text for x in list_el]
         return list_num
+
+    def get_value(self, x_path):
+        self.wait_element(x_path)
+        return  self.driver.find_element(*x_path).text
