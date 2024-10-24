@@ -39,8 +39,8 @@ class TestOrderList:
         OrderListPage.all_time_counter,
         OrderListPage.today_counter
     ])
-    def test_counter_all_time_increment_if_add_order(self, driver_with_order, counter):
-        driver, order_number = driver_with_order
+    def test_counter_all_time_increment_if_add_order(self, login_user, counter):
+        driver = login_user
         order_list_page = OrderListPage(driver)
         order_list_page.open_page()
         count_before=order_list_page.get_value(counter)
@@ -50,3 +50,12 @@ class TestOrderList:
         order_list_page.open_page()
         count_after = order_list_page.get_value(counter)
         assert count_after > count_before
+
+
+    def test_created_order_add_in_ready_list(self, driver_with_order):
+        driver, order_number = driver_with_order
+        action_page = HomePage(driver)
+        action_page.ac_click_element(HeaderElements.button_order_list)
+        action_page.wait_digits_after_change(OrderListPage.ready_order)
+        num_on_ready = action_page.get_value(OrderListPage.ready_order)
+        assert order_number in num_on_ready

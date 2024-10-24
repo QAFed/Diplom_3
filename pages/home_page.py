@@ -5,7 +5,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.action_chains import ActionChains
 from pages.order_accepted_page import OrderAcceptedPage
-
+import re
 
 class HomePage:
     URL = 'https://stellarburgers.nomoreparties.site/'
@@ -29,6 +29,10 @@ class HomePage:
     def click_element(self, el_xpath):
         self.wait_element(el_xpath)
         self.driver.find_element(*el_xpath).click()
+
+    def get_value(self, x_path):
+        self.wait_element(x_path)
+        return  self.driver.find_element(*x_path).text
 
     def ac_click_element(self, el_xpath):
         self.wait_element(el_xpath)
@@ -64,3 +68,7 @@ class HomePage:
         order_number = self.driver.find_element(*OrderAcceptedPage.order_number).text
         self.ac_click_element(OrderAcceptedPage.button_close_x)
         return order_number
+
+    def wait_digits_after_change(self, x_path):
+        return WebDriverWait(self.driver, 10).until(
+            lambda d: re.match(r'^\d+$', d.find_element(*x_path).text) is not None)
