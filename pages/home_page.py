@@ -1,11 +1,10 @@
-import time
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.action_chains import ActionChains
 from pages.order_accepted_page import OrderAcceptedPage
 import re
+
 
 class HomePage:
     URL = 'https://stellarburgers.nomoreparties.site/'
@@ -14,7 +13,7 @@ class HomePage:
     icon_krator_bulka = (By.XPATH, '//img[@alt="Краторная булка N-200i"]')
     icon_sous_spicy = (By.XPATH, '//img[@alt="Соус Spicy-X" and contains(@class, "BurgerIngredient")]')
     basket = (By.XPATH, '//section[contains(@class, "basket")]')
-    loading_animation =(By.XPATH, '//div[contains(@class, "opened")]/img[@alt="loading animation"]')
+    loading_animation = (By.XPATH, '//div[contains(@class, "opened")]/img[@alt="loading animation"]')
 
     def __init__(self, driver):
         self.driver = driver
@@ -32,7 +31,7 @@ class HomePage:
 
     def get_value(self, x_path):
         self.wait_element(x_path)
-        return  self.driver.find_element(*x_path).text
+        return self.driver.find_element(*x_path).text
 
     def ac_click_element(self, el_xpath):
         self.wait_element(el_xpath)
@@ -47,7 +46,6 @@ class HomePage:
         basket = self.driver.find_element(*HomePage.basket)
         actions = ActionChains(self.driver)
         actions.drag_and_drop(element, basket).perform()
-
 
     def check_counter_ingredient(self, el_xpath, expect_count):
         counter_xpath = (By.XPATH, f'{el_xpath[1]}/parent::a/div/p[contains(@class, "counter")]')

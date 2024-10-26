@@ -5,6 +5,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from pages.order_history_page import OrderHistoryPage
 from pages.login_page import LoginPage
+
+
 class TestLogiUserEvents:
     def test_open_personal_page_from_link_klick_on_home_page(self, login_user):
         action_page = HomePage(login_user)
@@ -28,6 +30,3 @@ class TestLogiUserEvents:
         action_page.ac_click_element(PersonalPage.button_logout)
         action_page.wait_element(LoginPage.button_login)
         assert login_user.current_url == LoginPage.URL
-
-
-

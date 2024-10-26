@@ -6,6 +6,7 @@ from pages.home_page import HomePage
 from pages.ingredient_detail import IngrdientDetailsPage
 from pages.order_accepted_page import OrderAcceptedPage
 
+
 class TestMainFunctions:
     def test_open_page_constructor_from_button_in_header(self, driver_factory):
         action_page = OrderListPage(driver_factory)
@@ -48,5 +49,3 @@ class TestMainFunctions:
         home_page.ac_click_element(HomePage.button_order)
         home_page.wait_element(OrderAcceptedPage.order_number)
         assert login_user.find_elements(*OrderAcceptedPage.flag_window_is_active) != []
-
-

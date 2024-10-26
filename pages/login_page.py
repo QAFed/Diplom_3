@@ -25,7 +25,6 @@ class LoginPage:
         self.wait_element(el_xpath)
         self.driver.find_element(*el_xpath).click()
 
-
     def ac_click_element(self, el_xpath):
         self.wait_element(el_xpath)
         element = self.driver.find_element(*el_xpath)

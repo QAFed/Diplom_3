@@ -4,12 +4,12 @@ from selenium.webdriver.support import expected_conditions
 from pages.forgot_pass_page import ForgotPage
 from selenium.webdriver.common.action_chains import ActionChains
 
+
 class ResetPage:
     URL = 'https://stellarburgers.nomoreparties.site/reset-password'
-    button_save =  (By.XPATH, '//button[text()="Сохранить"]')
+    button_save = (By.XPATH, '//button[text()="Сохранить"]')
     field_pass = (By.XPATH, '//input[@name="Введите новый пароль"]/parent::div')
     button_pass_visible = (By.XPATH, '//div[contains(@class, "password")]/div')
-
 
     def __init__(self, driver):
         self.driver = driver
@@ -34,5 +34,3 @@ class ResetPage:
         element = self.driver.find_element(*el_xpath)
         actions = ActionChains(self.driver)
         actions.click(element).perform()
-
-

@@ -3,11 +3,12 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.action_chains import ActionChains
 
+
 class OrderListPage:
     URL = 'https://stellarburgers.nomoreparties.site/feed'
     header_text = (By.XPATH, '//h1[text()="Лента заказов"]')
     load_message = (By.XPATH, '//div[text()="Загрузка..."]')
-    list_numbers_all_orders =(By.XPATH, '//ul//li//p[contains(text(),"#")]')
+    list_numbers_all_orders = (By.XPATH, '//ul//li//p[contains(text(),"#")]')
     all_time_counter = (By.XPATH, '//p[contains(text(), "за все время")]/parent::div/p[contains(@class, "Order")]')
     today_counter = (By.XPATH, '//p[contains(text(), "за сегодня")]/parent::div/p[contains(@class, "Order")]')
     ready_order = (By.XPATH, '//ul[contains(@class, "Ready")]/li')
@@ -52,5 +53,4 @@ class OrderListPage:
 
     def get_value(self, x_path):
         self.wait_element(x_path)
-        return  self.driver.find_element(*x_path).text
-
+        return self.driver.find_element(*x_path).text

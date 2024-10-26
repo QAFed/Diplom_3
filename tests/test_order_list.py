@@ -1,7 +1,4 @@
-import time
-
 import pytest
-
 from pages.order_list_page import OrderListPage
 from pages.header_page import HeaderElements
 from selenium.webdriver.support.wait import WebDriverWait
@@ -35,7 +32,7 @@ class TestOrderList:
         # print('номера', all_number_from_order_list)
         assert all(num in all_number_from_order_list for num in all_number_from_history)
 
-    @pytest.mark.parametrize('counter',[
+    @pytest.mark.parametrize('counter', [
         OrderListPage.all_time_counter,
         OrderListPage.today_counter
     ])
@@ -43,14 +40,13 @@ class TestOrderList:
         driver = login_user
         order_list_page = OrderListPage(driver)
         order_list_page.open_page()
-        count_before=order_list_page.get_value(counter)
+        count_before = order_list_page.get_value(counter)
         home_page = HomePage(driver)
         home_page.open_page()
         home_page.create_new_order()
         order_list_page.open_page()
         count_after = order_list_page.get_value(counter)
         assert count_after > count_before
-
 
     def test_created_order_add_in_ready_list(self, driver_with_order):
         driver, order_number = driver_with_order

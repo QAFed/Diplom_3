@@ -1,5 +1,3 @@
-import time
-
 from pages.forgot_pass_page import ForgotPage
 from pages.login_page import LoginPage
 from pages.reset_pass_page import ResetPage
