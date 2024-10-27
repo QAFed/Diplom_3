@@ -6,15 +6,18 @@ from pages.login_page import LoginPage
 from pages.home_page import HomePage
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
-
+from selenium.webdriver.firefox.service import Service as FirefoxService
+from webdriver_manager.firefox import GeckoDriverManager
 
 @pytest.fixture(params=["Chrome", "Firefox"])
+# @pytest.fixture(params=["Firefox"])
 def driver_factory(request):
     if request.param == "Chrome":
         service = ChromeService(ChromeDriverManager().install())
         driver = webdriver.Chrome(service=service)
     elif request.param == "Firefox":
-        driver = webdriver.Firefox()
+        service = FirefoxService(GeckoDriverManager().install())
+        driver = webdriver.Firefox(service=service)
     else:
         driver = webdriver.Chrome()
         print("Check driver_factory params, default now Chrome")

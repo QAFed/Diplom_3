@@ -25,6 +25,10 @@ class HomePage:
         WebDriverWait(self.driver, 10).until(
             expected_conditions.visibility_of_element_located(el_xpath))
 
+    def wait_element_off(self, el_xpath):
+        WebDriverWait(self.driver, 10).until(
+            expected_conditions.invisibility_of_element_located(el_xpath))
+
     def click_element(self, el_xpath):
         self.wait_element(el_xpath)
         self.driver.find_element(*el_xpath).click()
@@ -55,8 +59,7 @@ class HomePage:
 
     def wait_on_off_load_animation(self):
         self.wait_element(HomePage.loading_animation)
-        WebDriverWait(self.driver, 10).until(
-            expected_conditions.invisibility_of_element_located(HomePage.loading_animation))
+        self.wait_element_off(HomePage.loading_animation)
 
     def create_new_order(self):
         self.add_ingredient_in_burger(HomePage.icon_krator_bulka)
