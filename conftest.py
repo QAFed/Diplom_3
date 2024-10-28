@@ -45,10 +45,9 @@ def driver_with_order(login_user):
 
 
 @pytest.fixture
-def driver_with_two_orders(login_user):
+def driver_with_two_orders(driver_with_order):
+    login_user, order_number = driver_with_order
     home_page = HomePage(login_user)
-    home_page.open_page()
-    home_page.create_new_order()
     home_page.open_page()
     home_page.create_new_order()
     return login_user
