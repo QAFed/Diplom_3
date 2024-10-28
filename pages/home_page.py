@@ -82,6 +82,9 @@ class HomePage(BasePage):
         actual_count = self.driver.find_element(*counter_xpath).text
         assert actual_count == expect_count
 
+    def check_counter_krat_bulka(self):
+        self.check_counter_ingredient(self.icon_krator_bulka, '2')
+
     def wait_on_off_load_animation(self):
         self.wait_element(HomePage.loading_animation)
         self.wait_element_off(HomePage.loading_animation)
