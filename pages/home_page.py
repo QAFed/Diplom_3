@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.action_chains import ActionChains
 from pages.order_accepted_page import OrderAcceptedPage
 from pages.header_page import HeaderElements
+from pages.ingredient_detail import IngrdientDetailsPage
 import re
 from pages.base_page import BasePage
 
@@ -22,7 +23,20 @@ class HomePage(BasePage):
     def click_button_personal_account(self):
         self.ac_click_element(HeaderElements.button_personal_account)
 
+    def click_button_order_list(self):
+        self.ac_click_element(HeaderElements.button_order_list)
 
+    def click_button_order(self):
+        self.ac_click_element(self.button_order)
+
+    def click_button_crater_bulka(self):
+        self.ac_click_element(self.icon_krator_bulka)
+
+    def wait_header_text(self):
+        self.wait_element(self.header_text)
+
+    def check_self_current_url(self):
+        assert self.current_url() == HomePage.URL
     # def __init__(self, driver):
     #     self.driver = driver
 
@@ -59,6 +73,9 @@ class HomePage(BasePage):
         actions = ActionChains(self.driver)
         actions.drag_and_drop(element, basket).perform()
 
+    def add_krat_bulka_in_burger(self):
+        self.add_ingredient_in_burger(self.icon_krator_bulka)
+
     def check_counter_ingredient(self, el_xpath, expect_count):
         counter_xpath = (By.XPATH, f'{el_xpath[1]}/parent::a/div/p[contains(@class, "counter")]')
         self.wait_element(counter_xpath)
@@ -81,3 +98,9 @@ class HomePage(BasePage):
     # def wait_digits_after_change(self, x_path):
     #     return WebDriverWait(self.driver, 10).until(
     #         lambda d: re.match(r'^\d+$', d.find_element(*x_path).text) is not None)
+
+    def check_no_active_window_ingred_details(self):
+        assert self.find_elements(IngrdientDetailsPage.flag_window_is_active) == []
+
+    def check_active_window_accept_order(self):
+        assert self.find_elements(OrderAcceptedPage.flag_window_is_active) != []

@@ -3,6 +3,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.action_chains import ActionChains
 from pages.base_page import BasePage
+from pages.header_page import HeaderElements
 
 class OrderListPage(BasePage):
     URL = 'https://stellarburgers.nomoreparties.site/feed'
@@ -22,6 +23,17 @@ class OrderListPage(BasePage):
     def open_page(self):
         self.driver_get(OrderListPage.URL)
 
+    def wait_header_text(self):
+        self.wait_element(self.header_text)
+
+    def click_button_constructor(self):
+        self.ac_click_element(HeaderElements.button_constructor)
+
+
+
+
+    def check_self_current_url(self):
+        assert self.current_url() == OrderListPage.URL
     #
     # def wait_element(self, el_xpath):
     #     WebDriverWait(self.driver, 10).until(

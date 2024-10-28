@@ -14,6 +14,9 @@ class BasePage:
     def find_element(self, el_xpath):
         return self.driver.find_element(*el_xpath)
 
+    def find_elements(self, el_xpath):
+        return self.driver.find_elements(*el_xpath)
+
     def wait_element(self, el_xpath):
         WebDriverWait(self.driver, 10).until(
             expected_conditions.visibility_of_element_located(el_xpath))
