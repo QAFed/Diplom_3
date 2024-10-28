@@ -34,7 +34,6 @@ def login_user(driver_factory):
     login_page.ac_click_element(login_page.button_login)
     login_page.wait_element(HomePage.button_order)
     yield driver_factory
-    driver_factory.quit()
 
 
 @pytest.fixture
