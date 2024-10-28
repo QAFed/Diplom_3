@@ -44,3 +44,6 @@ class BasePage:
     def get_value(self, x_path):
         self.wait_element(x_path)
         return self.driver.find_element(*x_path).text
+
+    def current_url(self):
+        return self.driver.current_url

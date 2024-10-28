@@ -18,6 +18,10 @@ class LoginPage(BasePage):
     def open_page(self):
         self.driver_get(LoginPage.URL)
 
+    def click_link_recover(self):
+        self.click_element(LoginPage.link_recover_pass)
+
+
     # def wait_element(self, el_xpath):
     #     WebDriverWait(self.driver, 5).until(
     #         expected_conditions.visibility_of_element_located(el_xpath))

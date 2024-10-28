@@ -12,6 +12,20 @@ class ForgotPage(BasePage):
     def open_page(self):
         self.driver_get(ForgotPage.URL)
 
+    def wait_button_recovery(self):
+        self.wait_element(ForgotPage.button_recovery)
+
+    def check_self_current_url(self):
+        assert self.current_url() == ForgotPage.URL
+
+    def fill_email_test_data(self):
+        # self.wait_element(ForgotPage.field_email)
+        self.fill_field(ForgotPage.field_email, 'fedtest@disp.ru')
+
+    def click_button_recovery(self):
+        self.click_element(ForgotPage.button_recovery)
+
+
     # def __init__(self, driver):
     #     self.driver = driver
 
