@@ -29,6 +29,7 @@ def login_user(driver_factory):
     user = Helpers.new_user(driver_factory)
     login_page = LoginPage(driver_factory)
     login_page.open_page()
+    login_page.ac_click_element(login_page.field_email)
     login_page.fill_field(login_page.field_email, user.email)
     login_page.fill_field(login_page.field_pass, user.password)
     login_page.ac_click_element(login_page.button_login)

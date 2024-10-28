@@ -8,6 +8,21 @@ class PersonalPage(BasePage):
     button_order_history = (By.XPATH, '//a[text()="История заказов"]')
     button_logout = (By.XPATH, '//button[text()="Выход"]')
 
+
+    def wait_button_order_history(self):
+        self.wait_element(self.button_order_history)
+
+    def click_button_order_history(self):
+        self.ac_click_element(self.button_order_history)
+
+    def click_button_logout(self):
+        self.ac_click_element(self.button_logout)
+
+
+
+    def check_self_current_url(self):
+        assert self.current_url() == PersonalPage.URL
+
     # def __init__(self, driver):
     #     self.driver = driver
     #

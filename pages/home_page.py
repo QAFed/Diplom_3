@@ -3,6 +3,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.action_chains import ActionChains
 from pages.order_accepted_page import OrderAcceptedPage
+from pages.header_page import HeaderElements
 import re
 from pages.base_page import BasePage
 
@@ -17,6 +18,10 @@ class HomePage(BasePage):
 
     def open_page(self):
         self.driver_get(HomePage.URL)
+
+    def click_button_personal_account(self):
+        self.ac_click_element(HeaderElements.button_personal_account)
+
 
     # def __init__(self, driver):
     #     self.driver = driver

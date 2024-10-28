@@ -21,7 +21,12 @@ class LoginPage(BasePage):
     def click_link_recover(self):
         self.click_element(LoginPage.link_recover_pass)
 
+    def wait_button_login(self):
+        self.wait_element(self.button_login)
 
+
+    def check_self_current_url(self):
+        assert self.current_url() == LoginPage.URL
     # def wait_element(self, el_xpath):
     #     WebDriverWait(self.driver, 5).until(
     #         expected_conditions.visibility_of_element_located(el_xpath))
