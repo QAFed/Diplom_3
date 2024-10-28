@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from pages.base_page import BasePage
+from pages.header_page import HeaderElements
 
 class PersonalPage(BasePage):
     URL = 'https://stellarburgers.nomoreparties.site/account/profile'
@@ -18,7 +19,8 @@ class PersonalPage(BasePage):
     def click_button_logout(self):
         self.ac_click_element(self.button_logout)
 
-
+    def click_button_order_list(self):
+        self.ac_click_element(HeaderElements.button_order_list)
 
     def check_self_current_url(self):
         assert self.current_url() == PersonalPage.URL

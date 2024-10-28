@@ -26,10 +26,21 @@ class OrderListPage(BasePage):
     def wait_header_text(self):
         self.wait_element(self.header_text)
 
+    def wait_load_message_off(self):
+        self.wait_element_off(self.load_message)
+
+    def wait_all_time_counter(self):
+        self.wait_element_off(self.all_time_counter)
+
+
     def click_button_constructor(self):
         self.ac_click_element(HeaderElements.button_constructor)
 
+    def click_button_person_accaunt(self):
+        self.ac_click_element(HeaderElements.button_personal_account)
 
+    def wait_digits_after_change_ready_order(self):
+        self.wait_digits_after_change(self.ready_order)
 
 
     def check_self_current_url(self):
@@ -67,6 +78,5 @@ class OrderListPage(BasePage):
         list_num = [x.text for x in list_el]
         return list_num
 
-    # def get_value(self, x_path):
-    #     self.wait_element(x_path)
-    #     return self.driver.find_element(*x_path).text
+    def get_value_ready_order(self):
+        return  self.get_value(self.ready_order)

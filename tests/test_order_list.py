@@ -10,20 +10,27 @@ class TestOrderList:
         driver, order_number = driver_with_order
         order_list_page = OrderListPage(driver)
         order_list_page.open_page()
-        order_list_page.wait_element_off(OrderListPage.load_message)
+        # order_list_page.wait_element_off(OrderListPage.load_message)
+        order_list_page.wait_load_message_off()
         order_list_page.click_to_card_by_number(order_number)
         order_list_page.check_number_order_on_open_card(order_number)
 
     def test_number_from_history_exist_in_list_order(self, driver_with_two_orders):
         driver = driver_with_two_orders
-        action_page = OrderListPage(driver)
-        action_page.ac_click_element(HeaderElements.button_personal_account)
-        action_page.wait_element(PersonalPage.button_order_history)
-        action_page.ac_click_element(PersonalPage.button_order_history)
-        all_number_from_history = action_page.get_all_numbers_list()
-        action_page.ac_click_element(HeaderElements.button_order_list)
-        action_page.wait_element(OrderListPage.all_time_counter)
-        all_number_from_order_list = action_page.get_all_numbers_list()
+        order_list_page = OrderListPage(driver)
+        # action_page.ac_click_element(HeaderElements.button_personal_account)
+        order_list_page.click_button_person_accaunt()
+        # action_page.wait_element(PersonalPage.button_order_history)
+        pers_page = PersonalPage(driver)
+        pers_page.wait_button_order_history()
+        # action_page.ac_click_element(PersonalPage.button_order_history)
+        pers_page.click_button_order_history()
+        all_number_from_history = order_list_page.get_all_numbers_list()
+        # action_page.ac_click_element(HeaderElements.button_order_list)
+        pers_page.click_button_order_list()
+        # action_page.wait_element(OrderListPage.all_time_counter)
+        order_list_page.wait_all_time_counter()
+        all_number_from_order_list = order_list_page.get_all_numbers_list()
         assert all(num in all_number_from_order_list for num in all_number_from_history)
 
     @pytest.mark.parametrize('counter', [
@@ -44,8 +51,12 @@ class TestOrderList:
 
     def test_created_order_add_in_ready_list(self, driver_with_order):
         driver, order_number = driver_with_order
-        action_page = HomePage(driver)
-        action_page.ac_click_element(HeaderElements.button_order_list)
-        action_page.wait_digits_after_change(OrderListPage.ready_order)
-        num_on_ready = action_page.get_value(OrderListPage.ready_order)
+        home_page = HomePage(driver)
+        # action_page.ac_click_element(HeaderElements.button_order_list)
+        home_page.click_button_order_list()
+        order_list = OrderListPage(driver)
+        # order_list.wait_digits_after_change(OrderListPage.ready_order)
+        order_list.wait_digits_after_change_ready_order()
+        # num_on_ready = action_page.get_value(OrderListPage.ready_order)
+        num_on_ready = order_list.get_value_ready_order()
         assert order_number in num_on_ready
