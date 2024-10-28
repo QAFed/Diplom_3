@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-
+from pages.base_page import BasePage
 
 class HeaderElements:
     button_personal_account = (By.XPATH, '//p[text()="Личный Кабинет"]')

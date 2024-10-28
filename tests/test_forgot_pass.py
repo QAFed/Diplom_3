@@ -21,6 +21,6 @@ class TestForgotPass:
 
     def test_field_pass_activate_if_cklick_button_pass_visible(self, driver_factory):
         reset_pass = ResetPage(driver_factory)
-        reset_pass.open_page()
+        reset_pass.open_page_by_click()
         reset_pass.ac_click_element(ResetPage.button_pass_visible)
         reset_pass.assert_field_pass_active()

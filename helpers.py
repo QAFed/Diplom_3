@@ -1,7 +1,7 @@
 from datetime import datetime
 from pages.register_page import RegisterPage
 from pages.login_page import LoginPage
-from conftest import driver_factory
+
 
 class LoginPassName:
     def __init__(self):

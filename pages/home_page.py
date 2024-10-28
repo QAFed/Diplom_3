@@ -4,9 +4,9 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.action_chains import ActionChains
 from pages.order_accepted_page import OrderAcceptedPage
 import re
+from pages.base_page import BasePage
 
-
-class HomePage:
+class HomePage(BasePage):
     URL = 'https://stellarburgers.nomoreparties.site/'
     button_order = (By.XPATH, '//button[text()="Оформить заказ"]')
     header_text = (By.XPATH, '//h1[text()="Соберите бургер"]')
@@ -15,33 +15,36 @@ class HomePage:
     basket = (By.XPATH, '//section[contains(@class, "basket")]')
     loading_animation = (By.XPATH, '//div[contains(@class, "opened")]/img[@alt="loading animation"]')
 
-    def __init__(self, driver):
-        self.driver = driver
-
     def open_page(self):
-        self.driver.get(self.URL)
+        self.driver_get(HomePage.URL)
 
-    def wait_element(self, el_xpath):
-        WebDriverWait(self.driver, 10).until(
-            expected_conditions.visibility_of_element_located(el_xpath))
+    # def __init__(self, driver):
+    #     self.driver = driver
 
-    def wait_element_off(self, el_xpath):
-        WebDriverWait(self.driver, 10).until(
-            expected_conditions.invisibility_of_element_located(el_xpath))
+    # def open_page(self):
+    #     self.driver.get(self.URL)
 
-    def click_element(self, el_xpath):
-        self.wait_element(el_xpath)
-        self.driver.find_element(*el_xpath).click()
+    # def wait_element(self, el_xpath):
+    #     WebDriverWait(self.driver, 10).until(
+    #         expected_conditions.visibility_of_element_located(el_xpath))
+
+    # def wait_element_off(self, el_xpath):
+    #     WebDriverWait(self.driver, 10).until(
+    #         expected_conditions.invisibility_of_element_located(el_xpath))
+
+    # def click_element(self, el_xpath):
+    #     self.wait_element(el_xpath)
+    #     self.driver.find_element(*el_xpath).click()
 
     def get_value(self, x_path):
         self.wait_element(x_path)
         return self.driver.find_element(*x_path).text
 
-    def ac_click_element(self, el_xpath):
-        self.wait_element(el_xpath)
-        element = self.driver.find_element(*el_xpath)
-        actions = ActionChains(self.driver)
-        actions.click(element).perform()
+    # def ac_click_element(self, el_xpath):
+    #     self.wait_element(el_xpath)
+    #     element = self.driver.find_element(*el_xpath)
+    #     actions = ActionChains(self.driver)
+    #     actions.click(element).perform()
 
     def add_ingredient_in_burger(self, el_xpath):
         self.wait_element(el_xpath)
@@ -70,6 +73,6 @@ class HomePage:
         self.ac_click_element(OrderAcceptedPage.button_close_x)
         return order_number
 
-    def wait_digits_after_change(self, x_path):
-        return WebDriverWait(self.driver, 10).until(
-            lambda d: re.match(r'^\d+$', d.find_element(*x_path).text) is not None)
+    # def wait_digits_after_change(self, x_path):
+    #     return WebDriverWait(self.driver, 10).until(
+    #         lambda d: re.match(r'^\d+$', d.find_element(*x_path).text) is not None)

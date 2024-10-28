@@ -10,7 +10,7 @@ class TestOrderList:
         driver, order_number = driver_with_order
         order_list_page = OrderListPage(driver)
         order_list_page.open_page()
-        order_list_page.wait_close(OrderListPage.load_message)
+        order_list_page.wait_element_off(OrderListPage.load_message)
         order_list_page.click_to_card_by_number(order_number)
         order_list_page.check_number_order_on_open_card(order_number)
 
