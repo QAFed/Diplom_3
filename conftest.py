@@ -1,13 +1,13 @@
 from selenium import webdriver
 import pytest
-from helpers import LoginPassName
-from pages.register_page import RegisterPage
+from helpers import Helpers
 from pages.login_page import LoginPage
 from pages.home_page import HomePage
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
+
 
 @pytest.fixture(params=["Chrome", "Firefox"])
 def driver_factory(request):
@@ -24,22 +24,9 @@ def driver_factory(request):
     driver.quit()
 
 
-def new_user(driver_factory):
-    user = LoginPassName()
-    reg_page = RegisterPage(driver_factory)
-    reg_page.open_page()
-    reg_page.wait_element(reg_page.button_registrer)
-    reg_page.fill_field(reg_page.field_name, user.name)
-    reg_page.fill_field(reg_page.field_email, user.email)
-    reg_page.fill_field(reg_page.field_pass, user.password)
-    reg_page.click_element(reg_page.button_registrer)
-    reg_page.wait_element(LoginPage.button_login)
-    return user
-
-
 @pytest.fixture
 def login_user(driver_factory):
-    user = new_user(driver_factory)
+    user = Helpers.new_user(driver_factory)
     login_page = LoginPage(driver_factory)
     login_page.open_page()
     login_page.fill_field(login_page.field_email, user.email)
