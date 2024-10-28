@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from pages.base_page import BasePage
-
+import allure
 class RegisterPage(BasePage):
     URL = 'https://stellarburgers.nomoreparties.site/register'
 
@@ -16,7 +16,7 @@ class RegisterPage(BasePage):
     #
     # def open_page(self):
     #     self.driver.get(self.URL)
-
+    @allure.step('open page')
     def open_page(self):
         self.driver_get(RegisterPage.URL)
     #

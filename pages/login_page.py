@@ -3,7 +3,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.action_chains import ActionChains
 from pages.base_page import BasePage
-
+import allure
 
 class LoginPage(BasePage):
     URL = 'https://stellarburgers.nomoreparties.site/login'
@@ -15,16 +15,19 @@ class LoginPage(BasePage):
     # def __init__(self, driver):
     #     self.driver = driver
 
+    @allure.step('open page')
     def open_page(self):
         self.driver_get(LoginPage.URL)
 
+    @allure.step('click link recover')
     def click_link_recover(self):
         self.click_element(LoginPage.link_recover_pass)
 
+    @allure.step('wait button login')
     def wait_button_login(self):
         self.wait_element(self.button_login)
 
-
+    @allure.step('check self current url')
     def check_self_current_url(self):
         assert self.current_url() == LoginPage.URL
     # def wait_element(self, el_xpath):

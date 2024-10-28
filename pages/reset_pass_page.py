@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions
 from pages.forgot_pass_page import ForgotPage
 from selenium.webdriver.common.action_chains import ActionChains
 from pages.base_page import BasePage
-
+import allure
 class ResetPage(BasePage):
     URL = 'https://stellarburgers.nomoreparties.site/reset-password'
     button_save = (By.XPATH, '//button[text()="Сохранить"]')
@@ -13,11 +13,12 @@ class ResetPage(BasePage):
 
     # def __init__(self, driver):
     #     self.driver = driver
-
+    @allure.step('open page by click')
     def open_page_by_click(self):
         self.driver_get(ForgotPage.URL)
         self.click_element(ForgotPage.button_recovery)
 
+    @allure.step('wait button save')
     def wait_button_save(self):
         self.wait_element(ResetPage.button_save)
 
@@ -29,12 +30,15 @@ class ResetPage(BasePage):
     #     self.wait_element(el_xpath)
     #     self.driver.find_element(*el_xpath).click()
 
+    @allure.step('assert field pass active')
     def assert_field_pass_active(self):
         assert 'active' in self.find_element(self.field_pass).get_attribute("class")
 
+    @allure.step('check self current url')
     def check_self_current_url(self):
         assert self.current_url() == ResetPage.URL
 
+    @allure.step('click button pass visible')
     def click_button_pass_visible(self):
          self.ac_click_element(self.button_pass_visible)
 
