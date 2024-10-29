@@ -8,6 +8,7 @@ class LoginPage(BasePage):
     link_recover_pass = (By.XPATH, '//a[text()="Восстановить пароль"]')
     button_login = (By.XPATH, '//button[text()="Войти"]')
     field_email = (By.XPATH, '//label[text()="Email"]/parent::div/input')
+    field_email_cl = (By.XPATH, '//label[text()="Email"]/parent::div')
     field_pass = (By.XPATH, '//label[text()="Пароль"]/parent::div/input')
 
     @allure.step('open page')
@@ -20,7 +21,7 @@ class LoginPage(BasePage):
 
     @allure.step('fill field email')
     def fill_field_email(self, t_data):
-        self.ac_click_element(self.field_email)
+        self.ac_click_element(self.field_email_cl)
         self.fill_field(self.field_email, t_data)
 
     @allure.step('fill field pass')

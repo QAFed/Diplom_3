@@ -13,7 +13,7 @@ class ResetPage(BasePage):
     @allure.step('open page by click')
     def open_page_by_click(self):
         self.driver_get(ForgotPage.URL)
-        self.click_element(ForgotPage.button_recovery)
+        self.ac_click_element(ForgotPage.button_recovery)
 
     @allure.step('wait button save')
     def wait_button_save(self):
