@@ -29,11 +29,11 @@ def login_user(driver_factory):
     user = Helpers.new_user(driver_factory)
     login_page = LoginPage(driver_factory)
     login_page.open_page()
-    login_page.ac_click_element(login_page.field_email)
-    login_page.fill_field(login_page.field_email, user.email)
-    login_page.fill_field(login_page.field_pass, user.password)
-    login_page.ac_click_element(login_page.button_login)
-    login_page.wait_element(HomePage.button_order)
+    login_page.fill_field_email(user.email)
+    login_page.fill_field_pass(user.password)
+    login_page.click_button_login()
+    home_page = HomePage(driver_factory)
+    home_page.wait_button_order()
     yield driver_factory
 
 

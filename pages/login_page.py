@@ -1,9 +1,7 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.common.action_chains import ActionChains
 from pages.base_page import BasePage
 import allure
+
 
 class LoginPage(BasePage):
     URL = 'https://stellarburgers.nomoreparties.site/login'
@@ -11,9 +9,6 @@ class LoginPage(BasePage):
     button_login = (By.XPATH, '//button[text()="Войти"]')
     field_email = (By.XPATH, '//label[text()="Email"]/parent::div/input')
     field_pass = (By.XPATH, '//label[text()="Пароль"]/parent::div/input')
-
-    # def __init__(self, driver):
-    #     self.driver = driver
 
     @allure.step('open page')
     def open_page(self):
@@ -23,28 +18,24 @@ class LoginPage(BasePage):
     def click_link_recover(self):
         self.click_element(LoginPage.link_recover_pass)
 
+    @allure.step('fill field email')
+    def fill_field_email(self, t_data):
+        self.ac_click_element(self.field_email)
+        self.fill_field(self.field_email, t_data)
+
+    @allure.step('fill field pass')
+    def fill_field_pass(self, t_data):
+        self.ac_click_element(self.field_pass)
+        self.fill_field(self.field_pass, t_data)
+
     @allure.step('wait button login')
     def wait_button_login(self):
         self.wait_element(self.button_login)
 
+    @allure.step('click button login')
+    def click_button_login(self):
+        self.click_element(self.button_login)
+
     @allure.step('check self current url')
     def check_self_current_url(self):
         assert self.current_url() == LoginPage.URL
-    # def wait_element(self, el_xpath):
-    #     WebDriverWait(self.driver, 5).until(
-    #         expected_conditions.visibility_of_element_located(el_xpath))
-
-    # def click_element(self, el_xpath):
-    #     self.wait_element(el_xpath)
-    #     self.driver.find_element(*el_xpath).click()
-    #
-    # def ac_click_element(self, el_xpath):
-    #     self.wait_element(el_xpath)
-    #     element = self.driver.find_element(*el_xpath)
-    #     actions = ActionChains(self.driver)
-    #     actions.click(element).perform()
-    #
-    # def fill_field(self, el_xpath, load_data):
-    #     self.wait_element(el_xpath)
-    #     self.ac_click_element(el_xpath)
-    #     self.driver.find_element(*el_xpath).send_keys(load_data)

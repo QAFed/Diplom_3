@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 import allure
 
+
 class IngrdientDetailsPage(BasePage):
     URLpart = 'https://stellarburgers.nomoreparties.site/ingredient/'
     header_text = (By.XPATH, '//h2[text()="Детали ингредиента"]')

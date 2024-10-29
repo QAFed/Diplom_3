@@ -1,6 +1,8 @@
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 import allure
+
+
 class OrderAcceptedPage(BasePage):
     order_number = (By.XPATH, '//section[contains(@class, "opened")]/div/div/h2')
     flag_window_is_active = (By.XPATH, '//section[contains(@class, "opened")]')

@@ -3,13 +3,14 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.action_chains import ActionChains
 import re
 
+
 class BasePage:
     def __init__(self, driver):
         self.driver = driver
         self.URL = None
 
-    def driver_get(self, URL):
-        self.driver.get(URL)
+    def driver_get(self, url):
+        self.driver.get(url)
 
     def find_element(self, el_xpath):
         return self.driver.find_element(*el_xpath)

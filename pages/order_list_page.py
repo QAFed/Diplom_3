@@ -1,10 +1,9 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.common.action_chains import ActionChains
 from pages.base_page import BasePage
 from pages.header_page import HeaderElements
 import allure
+
+
 class OrderListPage(BasePage):
     URL = 'https://stellarburgers.nomoreparties.site/feed'
     header_text = (By.XPATH, '//h1[text()="Лента заказов"]')
@@ -13,12 +12,6 @@ class OrderListPage(BasePage):
     all_time_counter = (By.XPATH, '//p[contains(text(), "за все время")]/parent::div/p[contains(@class, "Order")]')
     today_counter = (By.XPATH, '//p[contains(text(), "за сегодня")]/parent::div/p[contains(@class, "Order")]')
     ready_order = (By.XPATH, '//ul[contains(@class, "Ready")]/li')
-
-    # def __init__(self, driver):
-    #     self.driver = driver
-    #
-    # def open_page(self):
-    #     self.driver.get(self.URL)
 
     @allure.step('open page')
     def open_page(self):
@@ -51,20 +44,6 @@ class OrderListPage(BasePage):
     @allure.step('check self current url')
     def check_self_current_url(self):
         assert self.current_url() == OrderListPage.URL
-    #
-    # def wait_element(self, el_xpath):
-    #     WebDriverWait(self.driver, 10).until(
-    #         expected_conditions.visibility_of_element_located(el_xpath))
-
-    # def wait_element_off(self, el_xpath):
-    #     WebDriverWait(self.driver, 15).until(
-    #         expected_conditions.invisibility_of_element_located(el_xpath))
-
-    # def ac_click_element(self, el_xpath):
-    #     self.wait_element(el_xpath)
-    #     element = self.driver.find_element(*el_xpath)
-    #     actions = ActionChains(self.driver)
-    #     actions.click(element).perform()
 
     @allure.step('click to card by number')
     def click_to_card_by_number(self, order_number):
@@ -89,4 +68,4 @@ class OrderListPage(BasePage):
 
     @allure.step('get value ready order')
     def get_value_ready_order(self):
-        return  self.get_value(self.ready_order)
+        return self.get_value(self.ready_order)
